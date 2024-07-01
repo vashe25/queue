@@ -26,8 +26,7 @@ func (q *Queue) Push(item *Task) {
 		return
 	}
 
-	q.last.next = item
-	item.prev = q.last
+	q.last.Link(item)
 	q.last = item
 
 	q.length++
@@ -44,12 +43,8 @@ func (q *Queue) Pop() *Task {
 	}
 
 	next := q.first.next
-	if next != nil {
-		next.prev = nil
-	}
 	item := q.first
-	item.prev = nil
-	item.next = nil
+	item.Unlink()
 	q.first = next
 	q.length--
 	return item

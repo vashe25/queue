@@ -49,3 +49,9 @@ func (q *Queue) Pop() *Task {
 	q.length--
 	return item
 }
+
+func (q *Queue) Length() int {
+	q.mtx.Lock()
+	defer q.mtx.Unlock()
+	return q.length
+}

@@ -32,3 +32,54 @@ func TestQueue(t *testing.T) {
 		}
 	}
 }
+
+func TestQueue_Length(t *testing.T) {
+	q := NewQueue()
+
+	if q.Length() != 0 {
+		t.Error("Length does not match")
+	}
+
+	q.Push(NewTask(1))
+
+	if q.Length() != 1 {
+		t.Error("Length does not match")
+	}
+
+	q.Push(NewTask(2))
+	if q.Length() != 2 {
+		t.Error("Length does not match")
+	}
+
+	q.Pop()
+	if q.Length() != 1 {
+		t.Error("Length does not match")
+	}
+
+	q.Push(NewTask(3))
+	if q.Length() != 2 {
+		t.Error("Length does not match")
+	}
+
+	q.Push(NewTask(4))
+	q.Push(NewTask(5))
+	q.Push(NewTask(6))
+	if q.Length() != 5 {
+		t.Error("Length does not match")
+	}
+
+	q.Pop()
+	q.Pop()
+	q.Pop()
+	q.Pop()
+	q.Pop()
+	if q.Length() != 0 {
+		t.Error("Length does not match")
+	}
+
+	q.Pop()
+	if q.Length() != 0 {
+		t.Error("Length does not match")
+	}
+
+}
